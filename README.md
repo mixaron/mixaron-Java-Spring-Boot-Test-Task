@@ -14,11 +14,13 @@ secret.key=your_secret_key
 Контроллер `AuthController` предоставляет следующие HTTP-методы:
 
 - `POST /api/auth/register`: Регистрация нового пользователя.
--  {
+ ```
+{
     "name": "Anton",
     "age": 21,
     "password": "securepassword"
 }
+```
 - `POST /api/auth/authenticate`: Аутентификация пользователя и получение JWT-токена.
  {
     "name": "Anton",
@@ -74,9 +76,11 @@ secret.key=your_secret_key
 - `GET /api/house`: Получение списка всех домов.
 - `GET /api/house/{id}`: Получение дома по идентификатору.
 - `POST /api/house`: Создание нового дома.
--  {
+```
+{
     "address": "123"
 }
+```
 - `PUT /api/house/{id}`: Обновление дома по идентификатору.
 - `DELETE /api/house/{id}`: Удаление дома по идентификатору.
 - `POST /api/house/{id}`: Установка нового владельца дома.
