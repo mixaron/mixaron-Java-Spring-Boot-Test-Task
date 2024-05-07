@@ -8,7 +8,7 @@
 db.username=your_username
 db.password=your_password
 secret.key=your_secret_key
-
+```
 ### AuthController
 
 Контроллер `AuthController` предоставляет следующие HTTP-методы:
