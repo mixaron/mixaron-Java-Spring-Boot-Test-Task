@@ -22,10 +22,12 @@ secret.key=your_secret_key
 }
 ```
 - `POST /api/auth/authenticate`: Аутентификация пользователя и получение JWT-токена.
+```
  {
     "name": "Anton",
     "password": "securepassword"
 }
+```
 ### AuthenticationRequest
 
 Класс `AuthenticationRequest` представляет собой DTO (Data Transfer Object), который используется для передачи учетных данных пользователя при аутентификации. Он содержит поля `name` и `password`.
