@@ -18,6 +18,7 @@ public class PersonController {
 
     private final PersonService personService;
 
+
     @GetMapping
     public ResponseEntity<List<Person>> getAllPersons() {
         return ResponseEntity.ok(personService.findAll());
@@ -31,10 +32,9 @@ public class PersonController {
     }
 
     @PutMapping
-    public ResponseEntity<HttpStatus> updateUser(@RequestBody Person person) {
+    public ResponseEntity<HttpStatus> updateUser(@Valid @RequestBody Person person) {
         personService.updatePerson(person);
         return ResponseEntity.status(HttpStatus.OK).body(HttpStatus.OK);
-
     }
 
     @DeleteMapping

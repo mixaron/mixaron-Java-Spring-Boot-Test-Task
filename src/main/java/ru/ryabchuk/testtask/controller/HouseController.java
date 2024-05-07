@@ -22,6 +22,7 @@ public class HouseController {
     public ResponseEntity<List<House>> getAllHouses() {
         return ResponseEntity.ok(houseService.findAll());
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<House> getHouseById(@PathVariable Long id) {
         House house = houseService.findById(id);
@@ -30,13 +31,13 @@ public class HouseController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> createHouse(@RequestBody @Valid House house) {
+    public ResponseEntity<HttpStatus> createHouse(@Valid @RequestBody  House house) {
         houseService.saveHouse( house);
         return ResponseEntity.status(HttpStatus.CREATED).body(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<HttpStatus> updateUser(@PathVariable Long id, @RequestBody House house) {
+    public ResponseEntity<HttpStatus> updateHouse(@PathVariable Long id, @Valid @RequestBody House house) {
         houseService.updateHouse(id, house);
         return ResponseEntity.status(HttpStatus.OK).body(HttpStatus.OK);
 

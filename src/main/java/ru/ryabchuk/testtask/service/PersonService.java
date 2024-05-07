@@ -17,6 +17,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class PersonService {
+
     private final PersonRepo personRepo;
 
     private final PasswordEncoder passwordEncoder;

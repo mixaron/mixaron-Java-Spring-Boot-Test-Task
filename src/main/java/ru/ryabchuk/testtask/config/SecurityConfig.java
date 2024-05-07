@@ -17,11 +17,7 @@ import ru.ryabchuk.testtask.config.JWTAuthenticationFilter;
 @RequiredArgsConstructor
 public class SecurityConfig extends SecurityConfigurerAdapter {
 
-//    @Bean
-//    public InMemoryUserDetailsManager userDetailsService() {
-//        UserDetails manager =  User.withUsername("user").password("password").roles("USER").build();
-//        return new InMemoryUserDetailsManager(manager);
-//    }
+
     private final AuthenticationProvider authenticationProvider;
 
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
@@ -36,7 +32,7 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // без сохранения состояния
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

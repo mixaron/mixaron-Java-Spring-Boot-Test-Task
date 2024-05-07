@@ -1,8 +1,6 @@
 package ru.ryabchuk.testtask.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -39,9 +37,8 @@ public class Person implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @Enumerated(EnumType.STRING)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Role role = Role.ROLE_LODGER;
+    private String role = "ROLE_USER";
 
     @OneToOne(mappedBy = "owner", cascade = CascadeType.DETACH)
     @JoinColumn(name = "house_id")
@@ -49,13 +46,17 @@ public class Person implements UserDetails {
     private House house;
 
     @OneToMany(mappedBy = "resident", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private List<HouseResident> residents;
+
+    public Person(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
 

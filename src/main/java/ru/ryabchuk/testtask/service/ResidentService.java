@@ -1,5 +1,6 @@
 package ru.ryabchuk.testtask.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
@@ -36,6 +37,7 @@ public class ResidentService {
     public void setResident(Long idResident) {
         House house = getInfo();
         Person person = personService.findById(idResident);
+        if (residentRepo.findByResidentId(person.getId()) != null) throw new EntityNotFoundException("Resident already exists");
         HouseResident houseResident = new HouseResident(person, house);
             residentRepo.save(houseResident);
     }
@@ -51,6 +53,9 @@ public class ResidentService {
         return houseService.getResidentsByHouseId(houseId);
     }
     public List<HouseResident> getResidentsByOwner() {
+        if (getInfo().getResidents().isEmpty()) {
+            throw new EntityNotFoundException("No one resident found");
+        }
         return getInfo().getResidents();
     }
 }

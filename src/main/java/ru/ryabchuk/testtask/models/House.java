@@ -1,16 +1,16 @@
 package ru.ryabchuk.testtask.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class House {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +28,9 @@ public class House {
     @OneToMany(mappedBy = "house")
     @JsonIgnore
     private List<HouseResident> residents;
+
+    public House(Long houseId, String address) {
+        this.id = houseId;
+        this.address = address;
+    }
 }

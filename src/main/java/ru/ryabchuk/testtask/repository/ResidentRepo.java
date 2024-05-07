@@ -8,4 +8,5 @@ import ru.ryabchuk.testtask.models.Person;
 @Repository
 public interface ResidentRepo extends JpaRepository<HouseResident, Long> {
     void deleteByResident(Person resident);
+    HouseResident findByResidentId(Long id);
 }

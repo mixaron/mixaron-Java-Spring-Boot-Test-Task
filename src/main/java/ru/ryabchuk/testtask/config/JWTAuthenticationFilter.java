@@ -25,7 +25,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
 
 
-    // проверка есть ли юзер в бд (надо реализовать свой метод)
     private final UserDetailsService userDetailsService;
 
     @Override
@@ -46,18 +45,15 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             UserDetails  userDetails = this.userDetailsService.loadUserByUsername(userName);
             // если токен валидный создаем
             if (jwtService.isTokenValid(jwt, userDetails)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken( // это аутентификации пользователя в системе
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities()
                 );
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); // прдеставление деталей
+                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
 
-                // Установка объекта аутентификации позволяет приложению сохранить информацию о пользователе,
-                // его ролях и других атрибутах безопасности, которые могут быть использованы
-                // для авторизации пользовательских запросов в дальнейшем.
-                SecurityContextHolder.getContext().setAuthentication(authToken); // поставили контекст холдер
+                SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
-        filterChain.doFilter(request, response); // всегда вызывать, чтобы уепочка работала
+        filterChain.doFilter(request, response);
     }
 }

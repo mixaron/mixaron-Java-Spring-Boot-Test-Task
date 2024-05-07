@@ -29,6 +29,7 @@ public class HouseService {
     @Transactional
     public void saveHouse(House house) {
         Person person = (Person) currentUser.getCurrentUser();
+        if (houseRepo.findByOwnerId(person.getId()) != null) throw new EntityNotFoundException("Owner already exists");
         house.setOwner(person);
         houseRepo.save(house);
         person.setHouse(house);
@@ -66,13 +67,6 @@ public class HouseService {
     public House findById(Long id) {
         return houseRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("House not found with id: " + id));
-    }
-
-    public House getResidentByHouseId(Long id) {
-        House house = houseRepo.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("House not found with id: " + id));
-        if (house.getResidents().isEmpty()) throw new EntityNotFoundException("Resident in this House not found");
-        return house;
     }
 
     public List<HouseResident> getResidentsByHouseId(Long id) {

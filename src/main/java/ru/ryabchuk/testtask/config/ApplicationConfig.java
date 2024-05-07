@@ -18,11 +18,9 @@ import ru.ryabchuk.testtask.repository.PersonRepo;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-    // нижнее просто копируй всегда
 
     private final PersonRepo personRepo;
 
-    // ппоиск по name
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> personRepo.findByName(username)
@@ -30,9 +28,6 @@ public class ApplicationConfig {
 
     }
 
-    //чтобы обеспечить аутентификацию пользователей на основе информации,
-    // полученной от UserDetailsService,
-    // и использования PasswordEncoder для проверки пароля.
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
