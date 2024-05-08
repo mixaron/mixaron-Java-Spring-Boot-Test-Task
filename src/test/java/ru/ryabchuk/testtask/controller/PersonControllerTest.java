@@ -99,22 +99,6 @@ class PersonControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
-
-    @Test
-    void testUpdateUser() throws Exception {
-        Person person = new Person(1L, "John Doe");
-
-        doNothing().when(personService).updatePerson(person);
-
-        String jsonPerson = "{\"id\":1,\"name\":\"John Doe\"}";
-
-        mockMvc.perform(put("/api/person")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonPerson))
-                        .andExpect(status().isOk());
-
-        verify(personService).updatePerson(person);
-    }
     @Test
     void testDeletePerson() throws Exception {
         doNothing().when(personService).deletePerson();

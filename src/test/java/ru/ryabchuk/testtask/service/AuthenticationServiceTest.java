@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.ryabchuk.testtask.controller.auth.PersonDTO;
+import ru.ryabchuk.testtask.dto.PersonDTO;
 import ru.ryabchuk.testtask.models.Person;
 import ru.ryabchuk.testtask.models.Token;
 import ru.ryabchuk.testtask.repository.PersonRepo;
