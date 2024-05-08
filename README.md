@@ -2,35 +2,32 @@
 
 Этот пакет содержит контроллеры, связанные с аутентификацией и авторизацией пользователей.
 
-В файле `application.properties` или `application.yml` необходимо указать следующие свойства(Ниже представлен properties для postgresql):
+В файле `application-secret.properties`  необходимо указать следующие свойства(представлен properties для postgresql):
 
 ```properties
-spring.application.name=TestTask
-spring.datasource.driver-class-name=org.postgresql.Driver
-spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
-spring.datasource.username=postgres
-spring.datasource.password=postgres
-spring.jpa.properties.hibernate.show_sql=true
-spring.liquibase.change-log=classpath:db/changelog/db.changelog-master.yaml
-spring.liquibase.enabled=true
-secret.key=m8LYfmRQD8lwfTDVEnVTNyy0h1xxLk7S
-spring.jpa.hibernate.ddl-auto=none
-
+db.username=your_username
+db.password=your_password
+secret.key=your_secret_key
+```
 ### AuthController
 
 Контроллер `AuthController` предоставляет следующие HTTP-методы:
 
 - `POST /api/auth/register`: Регистрация нового пользователя.
--  {
+ ```
+{
     "name": "Anton",
     "age": 21,
     "password": "securepassword"
 }
+```
 - `POST /api/auth/authenticate`: Аутентификация пользователя и получение JWT-токена.
+```
  {
     "name": "Anton",
     "password": "securepassword"
 }
+```
 ### AuthenticationRequest
 
 Класс `AuthenticationRequest` представляет собой DTO (Data Transfer Object), который используется для передачи учетных данных пользователя при аутентификации. Он содержит поля `name` и `password`.
@@ -81,9 +78,11 @@ spring.jpa.hibernate.ddl-auto=none
 - `GET /api/house`: Получение списка всех домов.
 - `GET /api/house/{id}`: Получение дома по идентификатору.
 - `POST /api/house`: Создание нового дома.
--  {
+```
+{
     "address": "123"
 }
+```
 - `PUT /api/house/{id}`: Обновление дома по идентификатору.
 - `DELETE /api/house/{id}`: Удаление дома по идентификатору.
 - `POST /api/house/{id}`: Установка нового владельца дома.
